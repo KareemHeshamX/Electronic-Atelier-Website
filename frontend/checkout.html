@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Checkout | THE DIGITAL ATELIER</title>
+
+    <link rel="stylesheet" href="./assets/css/theme.css" />
+    <link rel="stylesheet" href="./assets/css/components.css" />
+    <link rel="stylesheet" href="./assets/css/pages/checkout.css" />
+
+  </head>
+
+  <body class="has-topbar">
+    <header class="topbar anim-in">
+      <div class="container topbar__inner">
+        <a class="brand" href="./index.html">THE DIGITAL ATELIER</a>
+
+        <nav class="nav" aria-label="Primary">
+          <a href="./index.html">Home</a>
+
+          <div class="nav-dropdown" data-products-dropdown data-open="false">
+            <a
+              class="nav__trigger"
+              href="./shop.html"
+              data-products-trigger
+              aria-haspopup="menu"
+              aria-expanded="false"
+            >
+              Products <span class="nav__chev" aria-hidden="true">▾</span>
+            </a>
+            <div class="nav-dropdown__menu" role="menu" aria-label="Products" data-products-menu>
+              <a href="./shop.html" role="menuitem">All products</a>
+              <a href="./shop.html#laptops" role="menuitem">Laptops</a>
+              <a href="./shop.html#smartphones" role="menuitem">Smartphones</a>
+              <a href="./shop.html#accessories" role="menuitem">Accessories</a>
+            </div>
+          </div>
+        </nav>
+
+        <div class="topbar__actions">
+          <button
+            class="icon-btn nav-toggle"
+            type="button"
+            aria-label="Toggle navigation"
+            aria-expanded="false"
+            data-nav-toggle
+          >
+            Menu
+          </button>
+          <a class="icon-btn" href="./checkout.html" aria-label="Open cart" aria-current="page">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-cart"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="container mobile-nav" data-mobile-nav data-open="false">
+        <a href="./index.html">Home</a>
+        <a href="./shop.html">Products</a>
+        <a class="mobile-nav__sub" href="./shop.html#laptops">Laptops</a>
+        <a class="mobile-nav__sub" href="./shop.html#smartphones">Smartphones</a>
+        <a class="mobile-nav__sub" href="./shop.html#accessories">Accessories</a>
+        <a href="./checkout.html" aria-current="page">Cart</a>
+      </div>
+    </header>
+
+    <main class="container checkout anim-in anim-delay-1">
+      <div class="checkout-grid">
+        <section style="display: grid; gap: 40px">
+          <header class="anim-in anim-delay-2">
+            <div class="kicker">
+              <span class="kicker__dot" aria-hidden="true"></span>
+              <span class="eyebrow">Phase 01 / Shipping</span>
+            </div>
+            <h1 class="headline phase-title">Precision Delivery</h1>
+          </header>
+
+          <form style="display: grid; gap: 20px" class="anim-in anim-delay-2">
+            <div class="form-grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px">
+              <div class="field">
+                <label class="label" for="firstName">First Name</label>
+                <input class="input" id="firstName" type="text" placeholder="MARCUS" />
+              </div>
+              <div class="field">
+                <label class="label" for="lastName">Last Name</label>
+                <input class="input" id="lastName" type="text" placeholder="VANE" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label" for="address">Delivery Address</label>
+              <input
+                class="input"
+                id="address"
+                type="text"
+                placeholder="72 ATELIER BOULEVARD, SILICON DISTRICT"
+              />
+            </div>
+          </form>
+
+          <section class="anim-in anim-delay-3">
+            <div class="kicker">
+              <span class="kicker__dot" aria-hidden="true"></span>
+              <span class="eyebrow">Phase 02 / Payment</span>
+            </div>
+            <h2 class="headline" style="margin: 6px 0 0; font-size: 28px">Secure Transaction</h2>
+
+            <div class="cc-block" style="margin-top: 16px">
+              <div class="cc-row">
+                <div class="field" style="flex: 1">
+                  <label class="label" for="cardNumber">Card Number</label>
+                  <input class="input" id="cardNumber" placeholder="0000 0000 0000 0000" />
+                </div>
+                <div class="muted" aria-hidden="true" style="font-size: 36px">⎔</div>
+              </div>
+
+              <div class="form-grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 16px">
+                <div class="field">
+                  <label class="label" for="exp">Expiry</label>
+                  <input class="input" id="exp" placeholder="MM/YY" />
+                </div>
+                <div class="field">
+                  <label class="label" for="cvc">Security Code</label>
+                  <input class="input" id="cvc" type="password" placeholder="***" />
+                </div>
+              </div>
+            </div>
+
+            <button class="btn btn--primary btn--block" type="button" style="margin-top: 16px">
+              Authorize Transaction <span aria-hidden="true">→</span>
+            </button>
+          </section>
+        </section>
+
+        <aside class="summary anim-in anim-delay-2" aria-label="Order summary">
+          <div class="summary__card">
+            <div class="summary__header">
+              <h3 class="headline" style="margin: 0; font-size: 18px">Order Summary</h3>
+              <div class="label" style="margin: 0">2 Items</div>
+            </div>
+
+            <div style="display: grid; gap: 16px">
+              <article class="cart-item">
+                <div class="cart-item__img">
+                  <img
+                    alt="Laptop in cart"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4GzonDMuLKJZ4vU6jkHciLEaKHFwpTEJlIP8lVZDBbMXWI6RcHIVoKRuyNQmwD8ftQ7yQAyhcfDVEZf5-IIVwJz2XN9M6pumguKJNiTZa8IZsoeTKbdnbiWKWlbuESIqUNeeCmTRAM_u-dJJkCiRtPE5r2HH_qL2bP_UPrWLev7XyqzswIkvsWAWAtLS6kdITWptOlFRzm8dpHbseL_QkC6ZIyFcM9S4QXlYEXqSNNFRJTw7cvujyeArvLvNAOxxZTyw5cNUMSKc"
+                  />
+                </div>
+                <div style="display: grid; gap: 6px">
+                  <div class="headline" style="font-size: 12px">Pro Workstation</div>
+                  <div class="label" style="margin: 0">32GB / 1TB SSD / TITANIUM</div>
+                  <div style="display: flex; justify-content: space-between">
+                    <span class="eyebrow" style="font-size: 10px; color: var(--primary-container)">Qty: 01</span>
+                    <span class="headline" style="font-size: 14px">$3,499.00</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="cart-item">
+                <div class="cart-item__img">
+                  <img
+                    alt="Headphones in cart"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHTcV47EqhilP2OcY7B5Dxvv3muyYpqnXW0C24weL2lG1fMWohykGid7g0qJWJ6HM1xXCWiJiQ-ijuSC-U3IFSOfuOZTLb7dXAEVIgc-gKub_1RrvudHjUxpLOXJT5RlAr6LxKaGigQYSdvgs4eII-JEDUmqgDzZva3l0mfwVTr-uzkRenIG3__YS4hmSfRkphdU5wUd0P-d3hv3PUz2NW85CIt0kAVkXsFeLj2MyH8aP0Z9mxPmCCCXLsGC7fvNHio4vdZQthMAU"
+                  />
+                </div>
+                <div style="display: grid; gap: 6px">
+                  <div class="headline" style="font-size: 12px">Studio Headphones</div>
+                  <div class="label" style="margin: 0">PLANAR MAGNETIC / OPEN BACK</div>
+                  <div style="display: flex; justify-content: space-between">
+                    <span class="eyebrow" style="font-size: 10px; color: var(--primary-container)">Qty: 01</span>
+                    <span class="headline" style="font-size: 14px">$899.00</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div class="totals">
+              <div class="totals__row"><span>Subtotal</span><span>$4,398.00</span></div>
+              <div class="totals__row"><span>Shipping</span><span style="color: var(--primary-container)">Complimentary</span></div>
+              <div class="totals__row"><span>VAT</span><span>$0.00</span></div>
+              <div class="totals__final">
+                <span class="headline" style="font-size: 12px">Total Precision</span>
+                <span class="headline" style="font-size: 28px; color: var(--primary-container)">$4,398.00</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="assurance">
+            <span aria-hidden="true" style="color: var(--primary-container)">✓</span>
+            <div>
+              <div class="label" style="margin: 0; color: var(--on-surface)">Encrypted Protection</div>
+              <div class="muted" style="font-size: 10px; margin-top: 6px">
+                Your data is secured with AES-256 military-grade encryption.
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div class="brand">THE DIGITAL ATELIER</div>
+        <nav class="footer__links" aria-label="Footer">
+          <a href="#">Privacy policy</a>
+          <a href="#">Terms of service</a>
+          <a href="#">Shipping</a>
+        </nav>
+        <div class="footer__copy">© 2024 THE DIGITAL ATELIER. ENGINEERED PRECISION.</div>
+      </div>
+    </footer>
+
+    <script src="./assets/js/main.js"></script>
+  </body>
+</html>
+

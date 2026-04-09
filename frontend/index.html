@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>THE DIGITAL ATELIER | Precision Hardware</title>
+
+    <!--
+      Styles are split by responsibility:
+      - theme.css: tokens + base styles (design system)
+      - components.css: reusable components (nav, buttons, inputs, cards)
+      - home.css: small layout tweaks for this page only
+    -->
+    <link rel="stylesheet" href="./assets/css/theme.css" />
+    <link rel="stylesheet" href="./assets/css/components.css" />
+    <link rel="stylesheet" href="./assets/css/pages/home.css" />
+
+  </head>
+
+  <body class="has-topbar">
+    <!--
+      TOP BAR
+      The original stitch designs have a fixed top nav. Here we use `position: sticky`
+      so the page is simpler to reason about, but it stays visually similar.
+    -->
+    <header class="topbar anim-in">
+      <div class="container topbar__inner">
+        <a class="brand" href="./index.html">THE DIGITAL ATELIER</a>
+
+        <nav class="nav" aria-label="Primary">
+          <a href="./index.html" aria-current="page">Home</a>
+
+          <div class="nav-dropdown" data-products-dropdown data-open="false">
+            <a
+              class="nav__trigger"
+              href="./shop.html"
+              data-products-trigger
+              aria-haspopup="menu"
+              aria-expanded="false"
+            >
+              Products <span class="nav__chev" aria-hidden="true">▾</span>
+            </a>
+            <div class="nav-dropdown__menu" role="menu" aria-label="Products" data-products-menu>
+              <a href="./shop.html" role="menuitem">All products</a>
+              <a href="./shop.html#laptops" role="menuitem">Laptops</a>
+              <a href="./shop.html#smartphones" role="menuitem">Smartphones</a>
+              <a href="./shop.html#accessories" role="menuitem">Accessories</a>
+            </div>
+          </div>
+        </nav>
+
+        <div class="topbar__actions">
+          <button
+            class="icon-btn nav-toggle"
+            type="button"
+            aria-label="Toggle navigation"
+            aria-expanded="false"
+            data-nav-toggle
+          >
+            Menu
+          </button>
+          <a class="icon-btn" href="./checkout.html" aria-label="Open cart">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-cart"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Mobile nav is hidden on desktop via CSS; JS toggles data-open -->
+      <div class="container mobile-nav" data-mobile-nav data-open="false">
+        <a href="./index.html" aria-current="page">Home</a>
+        <a href="./shop.html">Products</a>
+        <a class="mobile-nav__sub" href="./shop.html#laptops">Laptops</a>
+        <a class="mobile-nav__sub" href="./shop.html#smartphones">Smartphones</a>
+        <a class="mobile-nav__sub" href="./shop.html#accessories">Accessories</a>
+        <a href="./checkout.html">Cart</a>
+      </div>
+    </header>
+
+    <main class="anim-in anim-delay-1">
+      <!-- HERO (Brushed metal texture + "electric glow" accent) -->
+      <section class="hero brushed-metal">
+        <div class="container hero__grid">
+          <div>
+            <div class="kicker" aria-label="Brand status">
+              <span class="status-pulse" aria-hidden="true"></span>
+              <span class="eyebrow">Established 2024</span>
+            </div>
+
+            <h1 class="headline hero__title">
+              THE<br />
+              <span style="color: var(--primary-container)">MONOLITH</span><br />
+              SERIES
+            </h1>
+
+            <p class="hero__lede muted">
+              Engineered with aerospace-grade aluminum and liquid-crystal cooling.
+              A new standard for professional hardware within the Digital Atelier.
+            </p>
+
+            <div style="display: flex; gap: 12px; padding-top: 18px; flex-wrap: wrap">
+              <a class="btn btn--primary" href="./shop.html">Acquire now</a>
+              <a class="btn btn--secondary" href="./product.html">Specifications</a>
+            </div>
+          </div>
+
+          <div class="hero__img-wrap" aria-label="Featured product image">
+            <div class="hero__glow" aria-hidden="true"></div>
+            <img
+              alt="Close-up dramatic shot of a high-end sleek silver laptop with a minimalist design on a dark metallic surface with cyan ambient glow"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9ia7H4D25PShvLLUVy7QXMXEOQ8agVkq0hfiZoTO90aT0dJ_B4YM5oL4peNgn3mOxNE7_6tm11RuMWmV_b4BqPAST_hLS13rSZgz-mHBkRDdJ2TmDIlKboIhVmt1bu27py-owZMQyzZjIxVq3m4pktsh8yRNayEtwbVC90RKRNiGbcLbcBRxMjTATud38fFAh-5frS3UJ0GRW9VLaZoKhkIn2F_YvLxxm2LvBfAR3VlYmtYcuvVmJQruMdxjyn9CkAhcrzh0_wwc"
+              style="
+                width: 100%;
+                object-fit: cover;
+                filter: grayscale(1) brightness(0.9);
+                transition: filter 600ms ease;
+              "
+              onmouseover="this.style.filter='grayscale(0) brightness(1)'"
+              onmouseout="this.style.filter='grayscale(1) brightness(0.9)'"
+            />
+
+            <div class="machined-glass hero__badge" aria-label="Current version badge">
+              <div class="muted" style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase">
+                Current version
+              </div>
+              <div class="headline" style="font-weight: 800; color: var(--primary-container); font-size: 18px">
+                0.99.1 BETA
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SELECTION GRID -->
+      <section class="section surface--lowest">
+        <div class="container">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: end;
+              gap: 18px;
+              flex-wrap: wrap;
+              margin-bottom: 28px;
+            "
+          >
+            <div>
+              <h2 class="headline" style="margin: 0 0 10px; font-size: 34px">
+                The selection
+              </h2>
+              <div style="height: 4px; width: 90px; background: var(--primary-container)"></div>
+            </div>
+
+            <div class="muted" style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase">
+              <span style="color: var(--primary-container); font-weight: 800">All</span>
+              <span style="margin-left: 14px">Computers</span>
+              <span style="margin-left: 14px">Wearables</span>
+              <span style="margin-left: 14px">Transducers</span>
+            </div>
+          </div>
+
+          <div class="selection__grid" role="list">
+            <article class="selection__featured" role="listitem">
+              <img
+                alt="Minimalist ultra-thin tablet lying on a dark textured granite surface with sharp side lighting highlighting its machined edges"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuADVILxEVkSEUTmzwsXD7q14zkX1FO-g755okk0gJm0SKokmHhHqHWuPoesOnFl9umyhINwbpPqWPIIONxoVSOQL5npKScYKFjQZnQ9Rlkzj84J4VueuMIXY5p2d5uRZDlLK4pjp_PzExBd5LCbWwukDR7K-o6YlyQyllQvWICQw80nT6zzGGLbiWsdA4LBljUNjIj_ynynEwmyNI2flRaId00---WBQ74v-RrJfUCOTuAxnPW3OPwPJVto1LrUBK58hZta_fyHI5A"
+              />
+              <div class="selection__featured-content">
+                <div style="display: flex; gap: 10px; flex-wrap: wrap">
+                  <span class="chip">M3 chip</span>
+                  <span class="chip">OLED</span>
+                </div>
+                <h3 class="headline" style="margin: 0; font-size: 34px">
+                  ATELIER TAB PRO
+                </h3>
+                <p class="muted" style="margin: 0; max-width: 54ch">
+                  The ultimate canvas for digital artisans. Calibrated for 99% DCI-P3 color
+                  accuracy.
+                </p>
+                <a
+                  href="./product.html"
+                  style="
+                    margin-top: 10px;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 10px;
+                    letter-spacing: 0.18em;
+                    text-transform: uppercase;
+                    font-size: 11px;
+                    color: var(--primary);
+                  "
+                >
+                  View system →
+                </a>
+              </div>
+            </article>
+
+            <div class="selection__side" role="listitem" aria-label="Secondary picks">
+              <article class="card">
+                <div class="card__pad">
+                  <div style="height: 180px; background: var(--surface-lowest); overflow: hidden; margin-bottom: 14px">
+                    <img
+                      alt="High-end noise-canceling headphones with brushed titanium finish in a dramatic dark studio setting with soft cyan highlights"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfsdZ64yUwJhFisdTeE3M1OAEYAyfVQrUdTkE6knR5R7lV28dV-tPsN9mAsgUUqwmMvxEOR1RSM_Lo6YNmxXuheIPNMvXMF7jJlbpUOeZG_HpIeVlmxxsCnpkOlxFSoIsK9Xs7k-A4_UYnh80oArdLmlHV-QK57Tyfyk_ohAEL2qItv8z849YoGVY-LElYC2SHXYU_O8H2jr6OpudKtzfMHgiFkpC7pkbBm45lgnjmlfIg89DtMh7AkT-wmURo1Fd-tof3RKjChzU"
+                      style="width: 100%; height: 100%; object-fit: contain; filter: grayscale(1) brightness(0.8)"
+                    />
+                  </div>
+                  <h4 class="headline" style="margin: 0 0 6px; font-size: 18px">ACOUSTIC CORE X</h4>
+                  <p class="muted" style="margin: 0 0 10px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase">
+                    Active noise isolation
+                  </p>
+                  <div style="color: var(--primary); font-family: var(--font-headline); font-weight: 700">$499.00</div>
+                </div>
+              </article>
+
+              <article class="card">
+                <div class="card__pad">
+                  <div style="height: 180px; background: var(--surface-lowest); overflow: hidden; margin-bottom: 14px">
+                    <img
+                      alt="Close-up of a high-tech smartwatch with a matte black metal frame and glowing digital interface on a dark surface"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJAUyakN8ntbbSzOML0hQ9FkxuvEre8tN1F1ql5CTnveSUiBMaDH1PxN9uWqu3eAhRzCWZCuZKDQ7RMSbiVUbzdjPr6bhZ-gLkKP2jpDMIofr5XuQ8ClTAyhqdeYvXDtdnQrYnArseSM2LxKYX2ZZrfK-3WpKkFr_jc5zWjhktWEy1ta5psmOFGJU283FisJe46tKuwujeaJfChci7lRtTb3Nk3XSOFMLgei2csSnFpXWv8JtC_mxw4Cx2jdFtHAY9SahqsJw2WmU"
+                      style="width: 100%; height: 100%; object-fit: contain; filter: grayscale(1) brightness(0.8)"
+                    />
+                  </div>
+                  <h4 class="headline" style="margin: 0 0 6px; font-size: 18px">CHRONO-LINK</h4>
+                  <p class="muted" style="margin: 0 0 10px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase">
+                    Sapphire glass • Heart sensor
+                  </p>
+                  <div style="color: var(--primary); font-family: var(--font-headline); font-weight: 700">$349.00</div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TECH SPECS / VALUES -->
+      <section class="section surface">
+        <div class="container specs">
+          <div class="spec">
+            <div class="spec__num">01</div>
+            <div class="headline" style="font-size: 12px; letter-spacing: 0.22em">Engineered precision</div>
+            <div class="muted" style="font-size: 12px">
+              Every component is milled from a single block of aerospace-grade aluminum for
+              maximum structural integrity.
+            </div>
+          </div>
+          <div class="spec">
+            <div class="spec__num">02</div>
+            <div class="headline" style="font-size: 12px; letter-spacing: 0.22em">Neural interface</div>
+            <div class="muted" style="font-size: 12px">
+              Optimized for low-latency feedback and intuitive tactile response systems across
+              all peripherals.
+            </div>
+          </div>
+          <div class="spec">
+            <div class="spec__num">03</div>
+            <div class="headline" style="font-size: 12px; letter-spacing: 0.22em">Thermal dynamics</div>
+            <div class="muted" style="font-size: 12px">
+              Advanced vapor-chamber cooling allows sustained peak performance in demanding
+              workflows.
+            </div>
+          </div>
+          <div class="spec">
+            <div class="spec__num">04</div>
+            <div class="headline" style="font-size: 12px; letter-spacing: 0.22em">Atomic security</div>
+            <div class="muted" style="font-size: 12px">
+              Hardware-level encryption modules keep your intellectual property within the
+              local network.
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div class="brand">THE DIGITAL ATELIER</div>
+        <nav class="footer__links" aria-label="Footer">
+          <a href="#">Privacy policy</a>
+          <a href="#">Terms of service</a>
+          <a href="#">Shipping</a>
+          <a href="#">Returns</a>
+        </nav>
+        <div class="footer__copy">© 2024 THE DIGITAL ATELIER. ENGINEERED PRECISION.</div>
+      </div>
+    </footer>
+
+    <script src="./assets/js/main.js"></script>
+  </body>
+</html>
+

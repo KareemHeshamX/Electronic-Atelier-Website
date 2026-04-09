@@ -1,0 +1,133 @@
+/* Home page layout tweaks (kept small; most styling is shared). */
+
+.hero {
+  min-height: 86vh;
+  display: grid;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.hero__title {
+  font-size: clamp(46px, 6vw, 92px);
+  line-height: 0.9;
+  margin: 0;
+}
+
+.hero__lede {
+  max-width: 52ch;
+  border-left: 1px solid rgba(59, 73, 75, 0.7);
+  padding-left: 18px;
+}
+
+.hero__img-wrap {
+  position: relative;
+}
+
+.hero__glow {
+  position: absolute;
+  inset: -40px;
+  background: rgba(0, 240, 255, 0.06);
+  filter: blur(120px);
+}
+
+.hero__badge {
+  position: absolute;
+  right: -18px;
+  bottom: -18px;
+  padding: 16px 18px;
+}
+
+.selection__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2px; /* "no line" but still creates rigid grid rhythm */
+  background: rgba(59, 73, 75, 0.12);
+}
+
+.selection__featured {
+  position: relative;
+  min-height: 420px;
+  overflow: hidden;
+  background: var(--surface-low);
+}
+
+.selection__featured img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.6;
+  transition: transform 700ms ease, opacity 700ms ease;
+}
+
+.selection__featured:hover img {
+  transform: scale(1.04);
+  opacity: 0.8;
+}
+
+.selection__featured-content {
+  position: relative;
+  height: 100%;
+  padding: 48px;
+  display: grid;
+  align-content: end;
+  gap: 14px;
+  background: linear-gradient(
+    to top,
+    rgba(14, 14, 14, 0.92),
+    rgba(14, 14, 14, 0.2),
+    transparent
+  );
+}
+
+.selection__side {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px;
+}
+
+.specs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+
+.spec {
+  display: grid;
+  gap: 10px;
+}
+
+.spec__num {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 44px;
+  color: var(--primary-container);
+}
+
+@media (max-width: 980px) {
+  .hero__grid {
+    grid-template-columns: 1fr;
+  }
+  .selection__grid {
+    grid-template-columns: 1fr;
+  }
+  .specs {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .specs {
+    grid-template-columns: 1fr;
+  }
+}
+
