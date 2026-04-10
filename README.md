@@ -1,42 +1,48 @@
-# Electronic Atelier Website
+## Electronic Atelier (Frontend)
 
-React-based frontend project for an electronic atelier storefront.
+This folder contains a React + Vite frontend build of your `@stitch` designs.
 
-## Project overview
+It is intentionally:
+- **React-based** (component + route structure).
+- **Documented** (clear file roles + “why” comments where helpful).
+- **Modular** (shared styles, layout components, and small JS utilities).
 
-This repository contains a React frontend implementation using:
+### Pages
 
-- React
-- Vite
-- CSS
+- `/`: Home / landing
+- `/shop`: Product listing grid
+- `/product`: Product details
+- `/checkout`: Checkout (UI only; no real payment)
 
-The main work lives in the `frontend` folder and includes:
+### Folder structure
 
-- `src/App.jsx` (route registration)
-- `src/pages/*` (home, shop, product, checkout pages)
-- `src/components/*` (shared layout components)
+- `src/main.jsx`: React entry + global stylesheet imports
+- `src/App.jsx`: app routes
+- `src/pages/*`: route pages
+- `src/components/*`: shared header/footer
+- `assets/css/theme.css`: Design tokens (colors, typography, spacing) + base styles
+- `assets/css/components.css`: Reusable UI components (buttons, chips, cards, forms)
+- `assets/css/pages/*.css`: Page-specific layout rules (kept small on purpose)
+- `assets/js/main.js`: UI interaction helpers used by React pages
 
-## Run locally
+### How to run
 
-Install and run the React app:
+Install dependencies and run the Vite dev server:
 
 ```powershell
-cd "C:\Users\karee\Downloads\FCI Projects\Electronic-Atelier-Website\frontend"
+cd "c:\Users\karee\Downloads\FCI Projects\Electronic-Atelier-Website\frontend"
 npm install
 npm run dev
 ```
 
-Then visit: `http://localhost:5173`
+Then visit `http://localhost:5173`.
 
-## Frontend structure
+### Notes on the design system
 
-- `frontend/assets/css/theme.css`: design tokens and base styles
-- `frontend/assets/css/components.css`: shared components
-- `frontend/assets/css/pages/*.css`: page-specific styles
-- `frontend/assets/js/main.js`: shared UI interaction initializers
+Your `@stitch/digital_atelier_dark/DESIGN.md` specifies a “Technical Brutalist” look:
+- 0px radius everywhere
+- tonal separation instead of divider lines
+- “electric glow” reserved for active/hover
 
-## Notes
-
-- This is a frontend prototype (no backend or payment processing yet).
-- See `frontend/README.md` for frontend-specific details.
+Those rules are implemented as CSS variables and a few reusable component classes.
 
