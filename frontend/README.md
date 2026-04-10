@@ -1,36 +1,38 @@
 ## Electronic Atelier (Frontend)
 
-This folder contains a **pure frontend** build of your `@stitch` designs.
+This folder contains a React + Vite frontend build of your `@stitch` designs.
 
 It is intentionally:
-- **Framework-free** (plain HTML/CSS/JS) so it’s easy to study.
+- **React-based** (component + route structure).
 - **Documented** (clear file roles + “why” comments where helpful).
-- **Modular** (one shared stylesheet, shared layout patterns, and small JS utilities).
+- **Modular** (shared styles, layout components, and small JS utilities).
 
 ### Pages
 
-- `index.html`: Home / landing
-- `shop.html`: Product listing grid
-- `product.html`: Product details
-- `checkout.html`: Checkout (UI only; no real payment)
+- `/`: Home / landing
+- `/shop`: Product listing grid
+- `/product`: Product details
+- `/checkout`: Checkout (UI only; no real payment)
 
 ### Folder structure
 
+- `src/main.jsx`: React entry + global stylesheet imports
+- `src/App.jsx`: app routes
+- `src/pages/*`: route pages
+- `src/components/*`: shared header/footer
 - `assets/css/theme.css`: Design tokens (colors, typography, spacing) + base styles
 - `assets/css/components.css`: Reusable UI components (buttons, chips, cards, forms)
 - `assets/css/pages/*.css`: Page-specific layout rules (kept small on purpose)
-- `assets/js/main.js`: Tiny JS for demo interactions (mobile menu, quantity controls)
+- `assets/js/main.js`: UI interaction helpers used by React pages
 
 ### How to run
 
-Because these pages use only relative links and no API calls, you can open them directly:
-- Double-click `frontend/index.html`
-
-If you prefer a local web server (recommended for future expansion):
+Install dependencies and run the Vite dev server:
 
 ```powershell
-cd "c:\Users\karee\Downloads\FCI Projects\Electronic Atelier Website\frontend"
-python -m http.server 5173
+cd "c:\Users\karee\Downloads\FCI Projects\Electronic-Atelier-Website\frontend"
+npm install
+npm run dev
 ```
 
 Then visit `http://localhost:5173`.

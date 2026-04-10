@@ -1,30 +1,29 @@
 # Electronic Atelier Website
 
-Frontend-only website project for an electronic atelier storefront.
+React-based frontend project for an electronic atelier storefront.
 
 ## Project overview
 
-This repository currently contains a pure frontend implementation using:
-- HTML
+This repository contains a React frontend implementation using:
+
+- React
+- Vite
 - CSS
-- JavaScript (vanilla)
 
 The main work lives in the `frontend` folder and includes:
-- `index.html` (home page)
-- `shop.html` (product listing)
-- `product.html` (product details)
-- `checkout.html` (checkout UI)
+
+- `src/App.jsx` (route registration)
+- `src/pages/*` (home, shop, product, checkout pages)
+- `src/components/*` (shared layout components)
 
 ## Run locally
 
-You can open the pages directly in your browser, starting with:
-- `frontend/index.html`
-
-For a local development server (recommended):
+Install and run the React app:
 
 ```powershell
 cd "C:\Users\karee\Downloads\FCI Projects\Electronic-Atelier-Website\frontend"
-python -m http.server 5173
+npm install
+npm run dev
 ```
 
 Then visit: `http://localhost:5173`
@@ -34,9 +33,10 @@ Then visit: `http://localhost:5173`
 - `frontend/assets/css/theme.css`: design tokens and base styles
 - `frontend/assets/css/components.css`: shared components
 - `frontend/assets/css/pages/*.css`: page-specific styles
-- `frontend/assets/js/main.js`: small interactive behaviors
+- `frontend/assets/js/main.js`: shared UI interaction initializers
 
 ## Notes
 
-- This is a static frontend prototype (no backend or payment processing yet).
+- This is a frontend prototype (no backend or payment processing yet).
 - See `frontend/README.md` for frontend-specific details.
+

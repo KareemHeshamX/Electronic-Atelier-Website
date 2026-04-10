@@ -19,16 +19,20 @@ function qsa(selector, root = document) {
 function initMobileNav() {
   const toggle = qs("[data-nav-toggle]");
   const mobileNav = qs("[data-mobile-nav]");
-  if (!toggle || !mobileNav) return;
+  if (!toggle || !mobileNav) return () => {};
 
-  toggle.addEventListener("click", () => {
+  const onToggle = () => {
     const open = mobileNav.getAttribute("data-open") === "true";
     mobileNav.setAttribute("data-open", open ? "false" : "true");
     toggle.setAttribute("aria-expanded", open ? "false" : "true");
-  });
+  };
+
+  toggle.addEventListener("click", onToggle);
+  return () => toggle.removeEventListener("click", onToggle);
 }
 
 function initQuantitySteppers() {
+  const removers = [];
   qsa("[data-qty]").forEach((wrapper) => {
     const input = qs("input", wrapper);
     const dec = qs("[data-qty-dec]", wrapper);
@@ -44,18 +48,25 @@ function initQuantitySteppers() {
       input.dispatchEvent(new Event("change", { bubbles: true }));
     };
 
-    dec.addEventListener("click", () => set(Number(input.value || min) - 1));
-    inc.addEventListener("click", () => set(Number(input.value || min) + 1));
+    const onDec = () => set(Number(input.value || min) - 1);
+    const onInc = () => set(Number(input.value || min) + 1);
+    dec.addEventListener("click", onDec);
+    inc.addEventListener("click", onInc);
+    removers.push(() => {
+      dec.removeEventListener("click", onDec);
+      inc.removeEventListener("click", onInc);
+    });
   });
+  return () => removers.forEach((remove) => remove());
 }
 
 function initProductsDropdown() {
   const dropdown = qs("[data-products-dropdown]");
-  if (!dropdown) return;
+  if (!dropdown) return () => {};
 
   const trigger = qs("[data-products-trigger]", dropdown);
   const menu = qs("[data-products-menu]", dropdown);
-  if (!trigger || !menu) return;
+  if (!trigger || !menu) return () => {};
 
   const close = () => {
     dropdown.setAttribute("data-open", "false");
@@ -67,31 +78,39 @@ function initProductsDropdown() {
     trigger.setAttribute("aria-expanded", "true");
   };
 
-  trigger.addEventListener("click", (e) => {
+  const onTriggerClick = (e) => {
     e.preventDefault();
     const isOpen = dropdown.getAttribute("data-open") === "true";
     if (isOpen) close();
     else open();
-  });
+  };
 
-  // Close when clicking outside the dropdown
-  document.addEventListener("click", (e) => {
+  const onDocumentClick = (e) => {
     if (!dropdown.contains(e.target)) close();
-  });
+  };
 
-  // Close on Escape
-  document.addEventListener("keydown", (e) => {
+  const onEscape = (e) => {
     if (e.key === "Escape") close();
-  });
+  };
+
+  trigger.addEventListener("click", onTriggerClick);
+  document.addEventListener("click", onDocumentClick);
+  document.addEventListener("keydown", onEscape);
+
+  return () => {
+    trigger.removeEventListener("click", onTriggerClick);
+    document.removeEventListener("click", onDocumentClick);
+    document.removeEventListener("keydown", onEscape);
+  };
 }
 
 function initProductGallery() {
   const gallery = qs("[data-product-gallery]");
-  if (!gallery) return;
+  if (!gallery) return () => {};
 
   const mainImage = qs("[data-gallery-main]", gallery);
   const thumbs = qsa("[data-gallery-thumb]", gallery);
-  if (!mainImage || thumbs.length === 0) return;
+  if (!mainImage || thumbs.length === 0) return () => {};
 
   const setActiveThumb = (nextThumb) => {
     thumbs.forEach((thumb) => {
@@ -116,15 +135,23 @@ function initProductGallery() {
     setActiveThumb(thumb);
   };
 
-  thumbs.forEach((thumb) => {
-    thumb.addEventListener("click", () => updateMainImage(thumb));
+  const removers = thumbs.map((thumb) => {
+    const onClick = () => updateMainImage(thumb);
+    thumb.addEventListener("click", onClick);
+    return () => thumb.removeEventListener("click", onClick);
   });
+
+  return () => removers.forEach((remove) => remove());
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  initMobileNav();
-  initQuantitySteppers();
-  initProductsDropdown();
-  initProductGallery();
-});
+export function initAtelierUi() {
+  const cleanups = [
+    initMobileNav(),
+    initQuantitySteppers(),
+    initProductsDropdown(),
+    initProductGallery(),
+  ];
+
+  return () => cleanups.forEach((cleanup) => cleanup());
+}
 
