@@ -1,0 +1,224 @@
+/* ─── Auth pages (Login / Register) ─── */
+
+.auth-card {
+  max-width: 480px;
+  margin: 0 auto;
+  background: var(--surface-low);
+  border-top: 2px solid var(--primary-container);
+  padding: 48px 40px 40px;
+}
+
+.auth-card__header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.auth-card__title {
+  font-size: 34px;
+  margin: 0 0 8px;
+}
+
+.auth-card__form {
+  display: grid;
+  gap: 20px;
+}
+
+.auth-card__footer {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+.auth-error {
+  padding: 12px 16px;
+  background: rgba(255, 60, 60, 0.1);
+  border: 1px solid rgba(255, 60, 60, 0.3);
+  color: #ff6b6b;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  font-family: var(--font-headline);
+}
+
+/* ─── User greeting in header ─── */
+.user-greeting {
+  padding: 4px 10px;
+  border: 1px solid rgba(59, 73, 75, 0.3);
+  display: none;
+}
+
+@media (min-width: 861px) {
+  .user-greeting {
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* ─── Out-of-stock product card (shop grid) ─── */
+.product--oos {
+  opacity: 0.7;
+}
+
+.product--oos .product__media img {
+  filter: grayscale(1) brightness(0.5);
+}
+
+.product__oos-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+.product__oos-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: rgba(255, 60, 60, 0.15);
+  border: 1px solid rgba(255, 60, 60, 0.5);
+  color: #ff6b6b;
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.product__media {
+  position: relative;
+}
+
+.price--oos {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.btn--disabled {
+  background: var(--surface-high);
+  border: 1px solid rgba(59, 73, 75, 0.35);
+  color: var(--outline);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ─── Out-of-stock product detail page ─── */
+.gallery--oos .gallery__hero img {
+  filter: grayscale(1) brightness(0.4);
+}
+
+.gallery__oos-banner {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.gallery__oos-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  background: rgba(255, 60, 60, 0.12);
+  border-top: 2px solid rgba(255, 60, 60, 0.5);
+  color: #ff6b6b;
+  font-family: var(--font-headline);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.pill--oos {
+  background: rgba(255, 60, 60, 0.15);
+  color: #ff6b6b;
+  border: 1px solid rgba(255, 60, 60, 0.4);
+}
+
+.oos-panel {
+  margin-top: 24px;
+  padding: 32px;
+  background: var(--surface-low);
+  border-left: 3px solid rgba(255, 60, 60, 0.5);
+  text-align: center;
+}
+
+.oos-panel__icon {
+  color: rgba(255, 60, 60, 0.6);
+  margin-bottom: 14px;
+}
+
+/* ─── Order history cards ─── */
+.order-history-card {
+  display: grid;
+  gap: 14px;
+  padding: 20px 24px;
+  background: var(--surface-low);
+  border-top: 2px solid transparent;
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 300ms ease, border-color 300ms ease, transform 250ms ease;
+}
+
+.order-history-card:hover {
+  background: var(--surface-high);
+  border-top-color: var(--primary-container);
+  transform: translateY(-2px);
+}
+
+.order-history-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.order-history-card__items {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.order-history-card__item {
+  width: 48px;
+  height: 48px;
+  overflow: hidden;
+  background: var(--surface-high);
+}
+
+.order-history-card__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.order-history-card__more {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-highest);
+  color: var(--outline);
+  font-family: var(--font-headline);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.order-history-card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 560px) {
+  .auth-card {
+    padding: 32px 20px;
+  }
+  .auth-card__title {
+    font-size: 28px;
+  }
+}

@@ -1,9 +1,28 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import MainLayout from "../layout/MainLayout";
 import { useAtelierUi } from "../hooks/useAtelierUi";
+import { fetchFeaturedProducts, fetchProducts } from "../api";
 
 export default function HomePage() {
   useAtelierUi("THE DIGITAL ATELIER | Precision Hardware");
+
+  const [featured, setFeatured] = useState([]);
+  const [accessories, setAccessories] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    Promise.all([fetchFeaturedProducts(), fetchProducts("accessories")])
+      .then(([feat, acc]) => {
+        setFeatured(feat);
+        setAccessories(acc.slice(0, 2)); // Show first two accessories
+      })
+      .catch(console.error)
+      .finally(() => setLoading(false));
+  }, []);
+
+  const hero = featured[0]; // Primary featured product for the hero
+  const featuredSecondary = featured[1]; // Secondary featured for selection
 
   return (
     <MainLayout>
@@ -29,9 +48,11 @@ export default function HomePage() {
                 <Link className="btn btn--primary" to="/shop">
                   Acquire now
                 </Link>
-                <Link className="btn btn--secondary" to="/product">
-                  Specifications
-                </Link>
+                {hero && (
+                  <Link className="btn btn--secondary" to={`/product/${hero.slug}`}>
+                    Specifications
+                  </Link>
+                )}
               </div>
             </div>
             <div className="hero__img-wrap">
@@ -72,98 +93,81 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="selection__grid" role="list">
-              <article className="selection__featured" role="listitem">
-                <img
-                  alt="Atelier tab pro"
-                  src="/images/home-featured.png"
-                />
-                <div className="selection__featured-content">
-                  <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-                    <span className="chip">M3 chip</span>
-                    <span className="chip">OLED</span>
-                  </div>
-                  <h3 className="headline" style={{ margin: 0, fontSize: 34 }}>
-                    ATELIER TAB PRO
-                  </h3>
-                  <p className="muted" style={{ margin: 0, maxWidth: "54ch" }}>
-                    The ultimate canvas for digital artisans.
-                  </p>
-                  <Link
-                    to="/product"
-                    style={{
-                      marginTop: 10,
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: 10,
-                      letterSpacing: "0.18em",
-                      textTransform: "uppercase",
-                      fontSize: 11,
-                      color: "var(--primary)",
-                    }}
-                  >
-                    View system →
-                  </Link>
+            {loading ? (
+              <div className="muted" style={{ textAlign: "center", padding: 48 }}>Loading catalogue…</div>
+            ) : (
+              <div className="selection__grid" role="list">
+                {featuredSecondary && (
+                  <article className="selection__featured" role="listitem">
+                    <img
+                      alt={featuredSecondary.name}
+                      src={featuredSecondary.image}
+                    />
+                    <div className="selection__featured-content">
+                      <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+                        {featuredSecondary.tags.map((tag) => (
+                          <span className="chip" key={tag}>{tag}</span>
+                        ))}
+                      </div>
+                      <h3 className="headline" style={{ margin: 0, fontSize: 34 }}>
+                        {featuredSecondary.name}
+                      </h3>
+                      <p className="muted" style={{ margin: 0, maxWidth: "54ch" }}>
+                        {featuredSecondary.description}
+                      </p>
+                      <Link
+                        to={`/product/${featuredSecondary.slug}`}
+                        style={{
+                          marginTop: 10,
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: 10,
+                          letterSpacing: "0.18em",
+                          textTransform: "uppercase",
+                          fontSize: 11,
+                          color: "var(--primary)",
+                        }}
+                      >
+                        View system →
+                      </Link>
+                    </div>
+                  </article>
+                )}
+                <div className="selection__side" role="listitem" aria-label="Secondary picks">
+                  {accessories.map((acc) => (
+                    <article className="card" key={acc.id}>
+                      <Link to={`/product/${acc.slug}`} style={{ textDecoration: "none", color: "inherit" }}>
+                        <div className="card__pad">
+                          <div
+                            style={{
+                              height: 180,
+                              background: "var(--surface-lowest)",
+                              overflow: "hidden",
+                              marginBottom: 14,
+                            }}
+                          >
+                            <img
+                              alt={acc.name}
+                              src={acc.image}
+                              style={{ width: "100%", height: "100%", objectFit: "contain", filter: "grayscale(1) brightness(0.8)" }}
+                            />
+                          </div>
+                          <h4 className="headline" style={{ margin: "0 0 6px", fontSize: 18 }}>
+                            {acc.name}
+                          </h4>
+                          <p className="muted" style={{ margin: "0 0 10px", fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase" }}>
+                            {acc.tags.join(" • ")}
+                          </p>
+                          <div style={{ color: "var(--primary)", fontFamily: "var(--font-headline)", fontWeight: 700 }}>
+                            ${acc.price.toLocaleString("en-US", { minimumFractionDigits: 2 })}
+                          </div>
+                        </div>
+                      </Link>
+                    </article>
+                  ))}
                 </div>
-              </article>
-              <div className="selection__side" role="listitem" aria-label="Secondary picks">
-                <article className="card">
-                  <div className="card__pad">
-                    <div
-                      style={{
-                        height: 180,
-                        background: "var(--surface-lowest)",
-                        overflow: "hidden",
-                        marginBottom: 14,
-                      }}
-                    >
-                      <img
-                        alt="Headphones"
-                        src="/images/home-side-headphones.png"
-                        style={{ width: "100%", height: "100%", objectFit: "contain", filter: "grayscale(1) brightness(0.8)" }}
-                      />
-                    </div>
-                    <h4 className="headline" style={{ margin: "0 0 6px", fontSize: 18 }}>
-                      ACOUSTIC CORE X
-                    </h4>
-                    <p className="muted" style={{ margin: "0 0 10px", fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase" }}>
-                      Active noise isolation
-                    </p>
-                    <div style={{ color: "var(--primary)", fontFamily: "var(--font-headline)", fontWeight: 700 }}>
-                      $499.00
-                    </div>
-                  </div>
-                </article>
-
-                <article className="card">
-                  <div className="card__pad">
-                    <div
-                      style={{
-                        height: 180,
-                        background: "var(--surface-lowest)",
-                        overflow: "hidden",
-                        marginBottom: 14,
-                      }}
-                    >
-                      <img
-                        alt="Watch"
-                        src="/images/home-side-watch.png"
-                        style={{ width: "100%", height: "100%", objectFit: "contain", filter: "grayscale(1) brightness(0.8)" }}
-                      />
-                    </div>
-                    <h4 className="headline" style={{ margin: "0 0 6px", fontSize: 18 }}>
-                      CHRONO-LINK
-                    </h4>
-                    <p className="muted" style={{ margin: "0 0 10px", fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase" }}>
-                      Sapphire glass • Heart sensor
-                    </p>
-                    <div style={{ color: "var(--primary)", fontFamily: "var(--font-headline)", fontWeight: 700 }}>
-                      $349.00
-                    </div>
-                  </div>
-                </article>
               </div>
-            </div>
+            )}
           </div>
         </section>
       </main>

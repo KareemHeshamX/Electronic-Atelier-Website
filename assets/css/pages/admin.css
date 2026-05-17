@@ -1,0 +1,209 @@
+/* ─── Admin Dashboard ─── */
+
+.admin-tabs {
+  display: flex;
+  gap: 2px;
+  border-bottom: 2px solid var(--surface-high);
+  margin-bottom: 8px;
+}
+
+.admin-tab {
+  appearance: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 14px 22px;
+  font-family: var(--font-headline);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--outline);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: color 200ms ease, border-color 200ms ease;
+}
+
+.admin-tab:hover {
+  color: var(--on-surface);
+}
+
+.admin-tab--active {
+  color: var(--primary-container);
+  border-bottom-color: var(--primary-container);
+}
+
+/* ─── Stats grid ─── */
+.admin-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.admin-stat-card {
+  padding: 24px;
+  background: var(--surface-low);
+  border-top: 2px solid var(--surface-high);
+  transition: border-color 300ms ease, background-color 300ms ease;
+}
+
+.admin-stat-card:hover {
+  border-top-color: var(--primary-container);
+  background: var(--surface-high);
+}
+
+/* ─── Tables ─── */
+.admin-table-wrap {
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th {
+  text-align: left;
+  padding: 12px 14px;
+  font-family: var(--font-headline);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--outline);
+  background: var(--surface-low);
+  border-bottom: 1px solid rgba(59, 73, 75, 0.2);
+  white-space: nowrap;
+}
+
+.admin-table td {
+  padding: 14px;
+  border-bottom: 1px solid rgba(59, 73, 75, 0.1);
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+.admin-table tbody tr {
+  transition: background-color 200ms ease;
+}
+
+.admin-table tbody tr:hover {
+  background: rgba(59, 73, 75, 0.08);
+}
+
+/* OOS row styling in admin table */
+.admin-row--oos {
+  background: rgba(255, 60, 60, 0.04);
+}
+
+.admin-row--oos td:first-child {
+  border-left: 3px solid rgba(255, 60, 60, 0.5);
+}
+
+/* ─── Product thumbnail in table ─── */
+.admin-product-thumb {
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  background: var(--surface-high);
+  flex-shrink: 0;
+}
+
+.admin-product-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ─── Stock toggle ─── */
+.admin-stock-toggle {
+  cursor: pointer;
+  border: none;
+  font-weight: 700;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+.admin-stock--in {
+  background: rgba(76, 255, 144, 0.12);
+  color: #4cff90;
+}
+
+.admin-stock--in:hover {
+  background: rgba(76, 255, 144, 0.2);
+}
+
+.admin-stock--out {
+  background: rgba(255, 60, 60, 0.12);
+  color: #ff6b6b;
+  animation: pulse-oos 2s ease-in-out infinite;
+}
+
+.admin-stock--out:hover {
+  background: rgba(255, 60, 60, 0.2);
+}
+
+@keyframes pulse-oos {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* ─── Status select ─── */
+.admin-status-select {
+  background: var(--surface-low);
+  border: 1px solid rgba(59, 73, 75, 0.35);
+  padding: 6px 8px;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-family: var(--font-headline);
+  cursor: pointer;
+  min-width: 120px;
+}
+
+.admin-status-select:focus {
+  border-color: var(--primary-container);
+  outline: none;
+}
+
+/* ─── Modal ─── */
+.admin-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeUp 200ms ease both;
+}
+
+.admin-modal {
+  background: var(--surface);
+  border: 1px solid rgba(59, 73, 75, 0.2);
+  border-top: 2px solid var(--primary-container);
+  padding: 32px;
+  width: min(600px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 860px) {
+  .admin-stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .admin-stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .admin-tab {
+    padding: 10px 14px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+  }
+}

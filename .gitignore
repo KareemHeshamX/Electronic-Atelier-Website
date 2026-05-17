@@ -1,2 +1,5 @@
 node_modules
 dist
+server/node_modules
+server/data.json
+server/atelier.db
