@@ -9,9 +9,20 @@ import { readFileSync, writeFileSync, existsSync } from "fs";
 import { fileURLToPath } from "url";
 import { randomBytes, pbkdf2Sync } from "crypto";
 import path from "path";
+import { copyFileSync } from "fs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DATA_FILE = path.join(__dirname, "data.json");
+
+// On Vercel, the filesystem is read-only except for /tmp.
+// We must put our database there to avoid crashes, though it will reset frequently.
+let DATA_FILE = path.join(__dirname, "data.json");
+if (process.env.VERCEL) {
+  DATA_FILE = path.join("/tmp", "data.json");
+  // Copy default data to /tmp if it doesn't exist there yet
+  if (!existsSync(DATA_FILE) && existsSync(path.join(__dirname, "data.json"))) {
+    try { copyFileSync(path.join(__dirname, "data.json"), DATA_FILE); } catch (e) { }
+  }
+}
 
 /* ─── Password hashing (pure Node.js crypto) ─── */
 

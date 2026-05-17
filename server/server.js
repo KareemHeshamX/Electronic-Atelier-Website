@@ -49,9 +49,15 @@ if (IS_PROD) {
 }
 
 /* ─── Start ─── */
-app.listen(PORT, () => {
-  console.log(`\n⚡ THE DIGITAL ATELIER — API server`);
-  console.log(`  → http://localhost:${PORT}`);
-  console.log(`  → Mode: ${IS_PROD ? "production" : "development"}`);
-  console.log(`  → Admin: admin@atelier.com / admin123\n`);
-});
+// When running on Vercel, we export the app for serverless functions.
+// When running locally, we start the listener.
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`\n⚡ THE DIGITAL ATELIER — API server`);
+    console.log(`  → http://localhost:${PORT}`);
+    console.log(`  → Mode: ${IS_PROD ? "production" : "development"}`);
+    console.log(`  → Admin: admin@atelier.com / admin123\n`);
+  });
+}
+
+export default app;
